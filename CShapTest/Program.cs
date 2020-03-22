@@ -7,43 +7,56 @@ namespace CShapTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("{0}, Hello Fibonacci World!", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+            /* 与えられた整数の配列の中から足りない数字を探す */
+            int[] arrayInt = new int[] { 1, 2, 3, 4, 5, 6, 8, 9 };
 
-
-            Task t1 = new Task(() =>
+            int result = 0;
+            for (int i = 0; i < arrayInt.Length - 1; i++)
             {
-                Console.WriteLine(String.Format("t1 >>> {0}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")));
-
-                Fibonacci(20);
-
-                Console.WriteLine(String.Format("t1 >>> {0}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")));
-            });
-
-
-
-            Task t2 = new Task(() =>
-            {
-                Console.WriteLine(String.Format("t2 >>> {0}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")));
-
-                int toValue = 20;
-                for (int i = 1; i <= toValue; i++)
+                if ((arrayInt[i] + 1) != arrayInt[i + 1])
                 {
-                    fibo(i);
-                    //Console.WriteLine("{0} ", fibo(i));
-                }
+                    //Console.WriteLine("{0}", arrayInt[i]);
 
-                Console.WriteLine(String.Format("t2 >>> {0}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")));
-            });
+                    result = arrayInt[i] + 1;
+
+                    break;
+                }
+            }
+
+            Console.WriteLine("{0}", result);
+
+
+            //Console.WriteLine("{0}, Hello Fibonacci World!", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+
+
+            //Task t1 = new Task(() =>
+            //{
+
+            //    Fibonacci(20);
+
+            //});
+
+
+
+            //Task t2 = new Task(() =>
+            //{
+            //    int toValue = 20;
+            //    for (int i = 1; i <= toValue; i++)
+            //    {
+            //        fibo(i);
+            //        //Console.WriteLine("{0} ", fibo(i));
+            //    }
+            //});
 
 
 
             // Task 쓰레드 시작
-            t1.Start();
-            t2.Start();
+            //t1.Start();
+            //t2.Start();
 
             // Task가 끝날 때까지 대기
-            t1.Wait();
-            t2.Wait();
+            //t1.Wait();
+            //t2.Wait();
 
 
 
