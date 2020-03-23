@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace CShapTest
 {
@@ -49,33 +50,65 @@ namespace CShapTest
             //Console.WriteLine("{0} : {1}", nMin, nMax);
 
             /* 合計すると与えられた数字と同じになる整数の配列のすべての組み合わせ */
-            int[] array = new int[] { 3, 6, 5, 4, 8, 9, 10, 13 };
+            //int[] array = new int[] { 3, 6, 5, 4, 8, 9, 10, 13 };
 
-            int nSumValue = 23;
-            int nValue = 0;
-            int nSumResult = 0;
+            //int nSumValue = 23;
+            //int nValue = 0;
+            //int nSumResult = 0;
+            //for (int x = 0; x < array.Length - 1; x++)
+            //{
+            //    nValue = array[x];
+            //    for (int i = 1; i < array.Length; i++)
+            //    {
+            //        nSumResult = nValue + array[i];
+            //        if (nSumValue.Equals(nSumResult))
+            //        {
+            //            Console.WriteLine("{0} + {1} = {2} ", nValue, array[i], nSumResult);
+            //            break;
+            //        }
+            //    }
+
+            //}
+            //Console.WriteLine("{0} ", nSumResult);
+
+
+            /* 配列に複数の重複がある場合、配列内の重複した数字を探す */
+
+            int[] array = new int[] { 1, 2, 3, 4, 4, 5, 7 };
+
+            int resultNum = 0;
+
             for (int x = 0; x < array.Length - 1; x++)
             {
-                nValue = array[x];
-                for (int i = 1; i < array.Length; i++)
+                if (array[x].Equals(array[x+1]))
                 {
-
-                    nSumResult = nValue + array[i];
-
-                    if (nSumValue.Equals(nSumResult))
-                    {
-                        Console.WriteLine("{0} + {1} = {2} ", nValue, array[i], nSumResult);
-
-
-                        break;
-                    }
-
-
+                    resultNum = array[x];
+                    break;
                 }
 
             }
 
-            //Console.WriteLine("{0} ", nSumResult);
+            Console.WriteLine("resultNum : {0}", resultNum);
+
+            //int[] array1 = new int[] { 1, 2, 3, 4, 5, 7 };
+            //int[] array2 = new int[] { 6, 7, 8, 9, 0 };
+
+            //List<int> result = new List<int>();
+
+
+            //for (int x = 0; x < array1.Length; x++)
+            //{
+            //    int temp = array1[x];
+            //    for (int i = 0; i < array2.Length; i++)
+            //    {
+            //        //Console.WriteLine("{0}, {1}", temp, array2[i]);
+            //        if (temp.Equals(array2[i])) result.Add(array2[i]);
+            //    }
+
+            //}
+            //Console.WriteLine(string.Join("\t", result));
+
+
 
 
 
