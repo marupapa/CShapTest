@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CShapTest
 {
@@ -8,6 +9,15 @@ namespace CShapTest
     {
         static void Main(string[] args)
         {
+            //n = 30, lost = [2,30], reserve[2]
+            // 5, [2, 4], [1, 3, 5]
+            int answer = ProgrammersTest.solution1(5, new int[] { 2, 4 }, new int[] { 1, 3, 5 });
+            //int answer = ProgrammersTest.solution1(8, new int[] { 2, 3 }, new int[] { 3, 4 });
+
+            Console.WriteLine("answer >>>>> :{0}", answer);
+
+
+
             /* 与えられた整数の配列の中から足りない数字を探す */
             /*
             int[] arrayInt = new int[] { 1, 2, 3, 4, 5, 6, 8, 9 };
@@ -73,22 +83,21 @@ namespace CShapTest
 
 
             /* 配列に複数の重複がある場合、配列内の重複した数字を探す */
+            //int[] array = new int[] { 1, 2, 3, 4, 4, 5, 7, 7 };
 
-            int[] array = new int[] { 1, 2, 3, 4, 4, 5, 7 };
+            //int resultNum = 0;
 
-            int resultNum = 0;
+            //for (int x = 0; x < array.Length - 1; x++)
+            //{
+            //    if (array[x].Equals(array[x+1]))
+            //    {
+            //        resultNum = array[x];
+            //        break;
+            //    }
 
-            for (int x = 0; x < array.Length - 1; x++)
-            {
-                if (array[x].Equals(array[x+1]))
-                {
-                    resultNum = array[x];
-                    break;
-                }
+            //}
 
-            }
-
-            Console.WriteLine("resultNum : {0}", resultNum);
+            //Console.WriteLine("resultNum : {0}", resultNum);
 
             //int[] array1 = new int[] { 1, 2, 3, 4, 5, 7 };
             //int[] array2 = new int[] { 6, 7, 8, 9, 0 };
@@ -103,12 +112,23 @@ namespace CShapTest
             //    {
             //        //Console.WriteLine("{0}, {1}", temp, array2[i]);
             //        if (temp.Equals(array2[i])) result.Add(array2[i]);
-            //    }
+            //    }       
 
             //}
             //Console.WriteLine(string.Join("\t", result));
 
 
+            //int[] array = new int[] { 9, 4, 5, 7, 3, 2, 1, 6, 8 };
+
+            //for (var i = 0; i < array.Length - 1; i++)
+            //{
+            //    for (var j = 0; j < array.Length - 1; j++)
+            //    {
+
+
+            //    }
+
+            //}
 
 
 
@@ -145,10 +165,6 @@ namespace CShapTest
             // Task가 끝날 때까지 대기
             //t1.Wait();
             //t2.Wait();
-
-
-
-
 
 
         }
@@ -190,10 +206,10 @@ namespace CShapTest
 
             }
             Console.WriteLine(String.Format("{0}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")));
-            
+
 
         }
-    
+
     }
 }
 

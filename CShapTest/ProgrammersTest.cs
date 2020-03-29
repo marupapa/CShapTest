@@ -8,8 +8,18 @@ namespace CShapTest
         public ProgrammersTest()
         {
         }
+        public int[] solution2(int[] answers)
+        {
+            int[] answer = new int[] { };
 
+
+
+
+            return answer;
+        }
         /*
+         * solution1
+         * 
         問題の説明
         昼休みに泥棒が入って、いくつかの学生が体操服を盗まれました。
         幸いなことに掛け替え体操服がある学生は、これらの者に体操服を借りうとします。
@@ -28,63 +38,60 @@ namespace CShapTest
         {
             int answer = 0;
 
-            List<int> arrResult = new List<int>();  //체육복을 대여한 학생 리스lostItem - 1)
             List<int> lostList = new List<int>();
             lostList.AddRange(lost);
             List<int> reserveList = new List<int>();
             reserveList.AddRange(reserve);
 
+            List<int> listReserve = new List<int>();  //대여받은 학생 리스트.
+
             int lostLenth = lost.Length;
             int reserveLenth = reserve.Length;
 
-            if ((30 > n && n >= 2)
+            if ((30 >= n && n >= 2)
                 && (n > lostLenth && lostLenth >= 1)
                 && (n > reserveLenth || reserveLenth >= 1))
             {
-                /*
-                 * 체육복을 안 가져온 학생중에 체육복을 빌리는 것이 가능한 학생수를 구하는 루프
-                 */
-                //foreach (int lostItem in lostList)
-                //{
-                //    if (!arrResult.Contains(lostItem - 1) && reserveList.Contains((lostItem - 1)))
-                //    {
-                //        arrResult.Add(lostItem - 1);
-                //    }
-                //    else if (!arrResult.Contains(lostItem + 1) && reserveList.Contains((lostItem + 1)))
-                //    {
-                //        arrResult.Add(lostItem + 1);
-                //    }
-
-                //    if (reserveList.Contains(lostItem)) arrResult.Remove(lostItem);
-                //}
 
                 for (int i = 0; i < lostLenth; i++)
                 {
-                    /* 체육복을 잃어버린 학생 */
-                    int lostItem = lost[i];
-
                     for (int j = 0; j < reserveLenth; j++)
                     {
-                        if (!arrResult.Contains(reserve[j]))
+                        if (lost[i].Equals(reserve[j]))
                         {
-                            if ((lostItem - 1).Equals(reserve[j]))
-                            {
-                                arrResult.Add(lostItem - 1);
-                                break;
-                            }
-                            else if ((lostItem + 1).Equals(reserve[j]))
-                            {
-                                arrResult.Add(lostItem + 1);
-                                break;
-                            }
+                            lostList.Remove(reserve[j]);
+                            reserveList.Remove(reserve[j]);
                         }
                     }
                 }
 
+
+                Console.WriteLine("lostList" + string.Join("\t", lostList));
+                Console.WriteLine("reserveList" + string.Join("\t", reserveList));
+
+                /*
+                 * 체육복을 안 가져온 학생중에 체육복을 빌리는 것이 가능한 학생수를 구하는 루프
+                 */
+                foreach (int lostItem in lostList)
+                {
+                    if (!listReserve.Contains(lostItem - 1) && reserveList.Contains((lostItem - 1)))
+                    {
+                        listReserve.Add(lostItem - 1);
+                    }
+                    else if (!listReserve.Contains(lostItem + 1) && reserveList.Contains((lostItem + 1)))
+                    {
+                        listReserve.Add(lostItem + 1);
+                    }
+                }
+
+
                 /* answer = 총학생수 - 체육복을 안가져온 학생수 + 채육복을 빌리는게 가능한 학생수 */
-                answer = n - lostLenth + (arrResult.Count);
+                Console.WriteLine("n :{0}, lost:{1}, reserve:{2}", n, lostList.Count, listReserve.Count);
+                answer = n - lostList.Count + listReserve.Count;
             }
             else answer = -1;
+
+
 
             return answer;
         }
