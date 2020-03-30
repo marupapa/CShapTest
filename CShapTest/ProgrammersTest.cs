@@ -57,10 +57,20 @@ namespace CShapTest
                     bicScore = answerCnt[i];
                 }
             }
+
             Console.WriteLine("bicScore:{0}", bicScore);
 
+            List<int> tempAnswer = new List<int>();
+            for (int i = 0; i < answerCnt.Length; i++)
+            {
 
+                if (bicScore.Equals(answerCnt[i]))
+                {
+                    Console.WriteLine(">>>:{0}, {1}", i, answerCnt[i]);
+                    tempAnswer.Add(i+1);
 
+                }
+            }
 
 
             //for (int i = 1; i < answerCnt.Length; i++)
@@ -78,9 +88,10 @@ namespace CShapTest
 
 
 
+            answer = tempAnswer.ToArray();
 
 
-
+            Console.WriteLine("answer :" + string.Join("\t", tempAnswer));
 
 
             return answer;
