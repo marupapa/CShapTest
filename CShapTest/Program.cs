@@ -18,10 +18,14 @@ namespace CShapTest
 
             /* solution 2 */
             //ProgrammersTest.solution2(new int[] { 1, 4, 3, 3, 4, 5, 6, 3, 2, 3, 3, 5 });
-            ProgrammersTest.solution2(new int[] { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 });
-           
+            //ProgrammersTest.solution2(new int[] { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 });
+
+            /* solution 3 */
+            //ProgrammersTest.solution3(7);
 
 
+            /* solution 4 */
+            ProgrammersTest.solution4(new int[] { 6, 9, 5, 7, 4 });
 
 
             /* 与えられた整数の配列の中から足りない数字を探す */

@@ -9,6 +9,88 @@ namespace CShapTest
         public ProgrammersTest()
         {
         }
+
+        /*
+        水平直線のトップN台を立てました。すべての塔の頂上には、信号を送信/受信する装置を設置しました。
+        発射された信号は、信号を送信塔よりも高い塔のみ受信します。また、一度受信した信号は、他の塔に送信されません。
+        例えば、高さが6、9、5、7、4人5塔が左に同時にレーザー信号を発射します。それでは、トップは次のように信号を送受信します。
+        高さが4である5番目の塔から発射された信号は、高さが7の4番目の塔が受信し、
+        高さが7の4番目の塔の信号は、高さが9人第二塔が、
+        高さが5である第三の塔の信号も高さが9である第二の塔が受信します。
+        高さが9である第二の塔と高さが6人の最初の塔が送信レーザー信号はどのタワーも受信することができません。
+
+        一番左から順にトップの高さを盛り込んだ配列heightsがパラメータとして与えられるとき、
+        各塔が撮影した信号を、どのタワーから受けたのか記録した配列をreturnするようにsolution関数を作成してください。
+        */
+
+        static public int[] solution4(int[] heights)
+        {
+            int[] answer = new int[] { };
+            Console.WriteLine("answer : " + string.Join(",", answer));
+
+            List<int> tempAnswer = new List<int>();
+
+            foreach(int item in heights)
+            {
+                tempAnswer.Add(0);
+            }
+
+            /* loof count 전체길이에 배열인덱스를 구하기 위해 1을 빼준다 */
+            int i = heights.Length - 1;
+            while (i > 0)
+            {
+
+                /* 상위 loof 보다 한자리 적은 숫자부터 시작해야 하기때문에 i-1 */
+                int j = i - 1; /* loof count */
+                while (j >= 0)
+                {
+                    if (heights[j] > heights[i])
+                    {
+                        Console.WriteLine(">i:{0}", heights[i]);
+                        Console.WriteLine(">>i:{0}, j;{1}", i, j + 1);
+                        // Console.WriteLine(">>i:{0}, j;{1}", heights[i], heights[j]);
+                        //isAcept = true;
+                        //tempAnswer.Add(j + 1);
+                        tempAnswer[i] = j + 1;
+
+                        //answer[i] = j + 1;
+
+
+                        break;
+                    }
+                    j--;
+                }
+
+
+                i--;
+            }
+
+            answer = tempAnswer.ToArray();
+
+            Console.WriteLine("answer : " + string.Join(",", answer));
+
+            return answer;
+        }
+
+
+        /*
+         *長さがnであり、数拍手拍手拍手....のようなパターンを維持する文字列を返す関数、solutionを完成します。
+         * 例えば、nが4であればスイカスイカを返し、3であれば、数拍手を返しします。
+         */
+        static public string solution3(int n)
+        {
+            string answer = "";
+
+            string[] word = { "수", "박" };
+
+            for (int i = 0; i < n; i++)
+            {
+                answer = answer + word[(i % 2)];
+            }
+
+
+            return answer;
+        }
         /*
         수포자는 수학을 포기한 사람의 준말입니다.
         수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다.
