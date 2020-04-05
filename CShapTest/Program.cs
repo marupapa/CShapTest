@@ -25,7 +25,18 @@ namespace CShapTest
 
 
             /* solution 4 */
-            ProgrammersTest.solution4(new int[] { 6, 9, 5, 7, 4 });
+            //ProgrammersTest.solution4(new int[] { 6, 9, 5, 7, 4 });
+
+
+            /* solution truck */
+            //ProgrammersTest.solution_truck(4, 11, new int[] { 7, 4, 5, 6, 8 });
+
+
+
+            /* solution printer */
+            //ProgrammersTest.solution_printer(new int[] { 2, 1, 3, 2 }, 2);
+            ProgrammersTest.solution_printer(new int[] { 1, 1, 9, 1, 1, 1 }, 0);
+
 
 
             /* 与えられた整数の配列の中から足りない数字を探す */
@@ -184,13 +195,6 @@ namespace CShapTest
             {
                 return 1;
             }
-            /*
-            3(2 +1)
-
-
-            )
-             */
-
             //Console.WriteLine("{0}, {1}", fibo(value - 1), fibo(value - 2));
 
             return fibo(value - 1) + fibo(value - 2);

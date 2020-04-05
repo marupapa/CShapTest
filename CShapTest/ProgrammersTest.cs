@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Collections.Concurrent;
 
 namespace CShapTest
 {
@@ -9,7 +11,133 @@ namespace CShapTest
         public ProgrammersTest()
         {
         }
+        static public int[] solution_stock(int[] prices)
+        {
+            int[] answer = new int[] { };
+            return answer;
+        }
+        public class StructPrinter
+        {
+            public int index { get; set; }
+            public int prioritie { get; set; }
+        }
+        static public int solution_printer(int[] priorities, int location) {
+            int answer = 0;
 
+            ConcurrentQueue<StructPrinter> prior = new ConcurrentQueue<StructPrinter>();
+            for (int i = 0; i < priorities.Length; i++)
+            {
+                prior.Enqueue(new StructPrinter()
+                {
+                    index = i,
+                    prioritie = priorities[i]
+                });
+
+            }
+
+            while (prior.Count > 1)
+            {
+                StructPrinter peekResult = (prior.TryPeek(out peekResult)) ? peekResult : null;
+                StructPrinter dequeue = (prior.TryDequeue(out dequeue)) ? dequeue : null;
+
+                int max = 0;
+                foreach(var item in prior)
+                    if (max < item.prioritie) max = item.prioritie;
+
+                if (peekResult.prioritie < max)
+                {
+                    prior.Enqueue(dequeue);
+                }
+                else
+                {
+                    answer++;
+                    if (peekResult.index.Equals(location))
+                    {
+                        //Console.WriteLine("index, prioritie, answer : {0}, {1}, {2}", peekResult.index, peekResult.prioritie, answer);
+                        return answer;
+                    }
+                }
+                //Console.WriteLine("prior : " + string.Join(",", prior.ToList()));
+            }
+
+
+            Console.WriteLine("answer : {0}", answer);
+            return answer;
+        }
+
+        /*
+        トラック数台川を横切ること車線の橋を決められた順に渡ろうします。
+        すべてのトラックが橋を渡っては、最小数秒かかる把握する必要があります。
+        トラックは1秒に1だけ動き、脚の長さはbridge_lengthで足は重量weightまで耐えます。
+        ※トラックが足に完全に上がらない場合は、このトラックの重量は考慮していません。
+        例えば、長さが2であり、10kg重量に耐える橋があります。
+        重量が[7、4、5、6] kgであるトラックが順番に最短時間で橋を渡ってするには、次のように渡らなければします。
+        */
+        static public int solution_truck(int bridge_length, int weight, int[] truck_weights)
+        {
+            int answer = 0;
+
+            //List<int> list = new List<int>();
+            //int[] bridgeInTruck = new int[bridge_length];
+            
+            //for (int i = 0; i < truck_weights.Length; i++)
+            //{
+            //    Console.WriteLine("i : {0}", truck_weights[i]);
+            //    list.Add(truck_weights[i]);
+
+            //    int bridgeSum = 0;
+            //    for (int j = i + 1; j < bridge_length+j; j++)
+            //    {
+            //        Console.WriteLine("j >>> : {0}", truck_weights[j]);
+            //    }
+
+
+
+
+
+
+
+            //    //if (i != (truck_weights.Length - 1)) /* 맨 마지막 트럭여부 체크 */
+            //    //{
+
+
+
+            //    //    if ((truck_weights[i] + truck_weights[i + 1]) > weight)
+            //    //    {
+            //    //        for (int j = 1; j < bridge_length; j++) list.Add(0);
+            //    //    }
+            //    //}
+            //}
+            //Console.WriteLine("list : " + string.Join(",", list));
+            //answer = list.Count + bridge_length;
+            //Console.WriteLine("answer : {0}", answer);
+
+
+
+
+
+            //for (int i = 0; i < truck_weights.Length; i++)
+            //{
+            //    Console.WriteLine(">> : {0}, {1}, {2}", truck_weights[i], truck_weights.Length - i, (truck_weights.Length - i) % bridge_length);
+            //    //if (i != (truck_weights.Length - 1))
+            //    //{
+            //    //}
+
+            //    //int sum = 0;
+            //    //for (int j = i; j < i + bridge_length; j++)
+            //    //{
+            //    //    //Console.WriteLine(">>>>>> : {0}", truck_weights[j]);
+            //    //}
+            //}
+
+
+
+
+
+
+
+            return answer;
+        }
         /*
         水平直線のトップN台を立てました。すべての塔の頂上には、信号を送信/受信する装置を設置しました。
         発射された信号は、信号を送信塔よりも高い塔のみ受信します。また、一度受信した信号は、他の塔に送信されません。
