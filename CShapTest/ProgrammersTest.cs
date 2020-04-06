@@ -135,6 +135,29 @@ namespace CShapTest
                     else break;
                 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                ///////////////////////////
+
                 
                 Console.WriteLine("bridge >>>>>> : " + string.Join(",", bridge));
 

@@ -29,13 +29,15 @@ namespace CShapTest
 
 
             /* solution truck */
-            //ProgrammersTest.solution_truck(4, 11, new int[] { 7, 4, 5, 6, 8 });
+            ProgrammersTest.solution_truck(2, 10, new int[] { 7, 4, 5, 6 });
+            ProgrammersTest.solution_truck(100, 100, new int[] { 10 });
+            ProgrammersTest.solution_truck(100, 100, new int[] { 10,10,10,10,10,10,10,10,10,10 });
 
 
 
             /* solution printer */
             //ProgrammersTest.solution_printer(new int[] { 2, 1, 3, 2 }, 2);
-            ProgrammersTest.solution_printer(new int[] { 1, 1, 9, 1, 1, 1 }, 0);
+            //ProgrammersTest.solution_printer(new int[] { 1, 1, 9, 1, 1, 1 }, 0);
 
 
 
