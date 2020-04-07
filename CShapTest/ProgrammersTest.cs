@@ -85,18 +85,16 @@ namespace CShapTest
             /*橋を渡ろうとしているトラックのキュー*/
             ConcurrentQueue<int> qTruckList = new ConcurrentQueue<int>();
 
-
-            
             for (int i = 0; i < truck_weights.Length; i++)
                 qTruckList.Enqueue(truck_weights[i]);
 
-            //ConcurrentQueue<int> exitTruckList = new ConcurrentQueue<int>();
-                
+            ConcurrentQueue<int> exitTruckList = new ConcurrentQueue<int>();
 
             while(!qTruckList.IsEmpty)
             {
-                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                answer++;
 
+                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 Console.WriteLine("qTruckList : " + string.Join(",", qTruckList));
                 /* 橋に進入するトラックの重さ */
                 int truckWeight = (qTruckList.TryDequeue(out truckWeight)) ? truckWeight : 0;
@@ -111,55 +109,66 @@ namespace CShapTest
                 //     bridge.Enqueue(truckWeight); /*トラックが橋に進入*/
                 //     answer = answer + bridge_length;
                 // }
-                bridge.Enqueue(truckWeight); /*トラックが橋に進入*/
-                answer = answer + bridge_length;
-                
-                /* 트럭이 다리에 진입 */
-                /* 진입하려는 트럭의 무게와 이미 진입한 트럭의 무게는 weight를 넘어서는 안된다.  */
-                /* 다리의 길이보다 진입트럭댓수가 적어야 하며 */
+                /*トラックが橋に進入*/
+                bridge.Enqueue(truckWeight); 
+                //answer = answer + bridge_length;
+
                 while(!qTruckList.IsEmpty)
                 {
-                    /*橋に進入できるトラックがあれば進入させる*/
-                    int truckPeek = (qTruckList.TryPeek(out truckPeek)) ? truckPeek : 0;
-                    /*トラックが進入できるかと橋に空きがあるかをチェック*/
-                    if (truckPeek <= (weight - bridge.Sum()) && bridge_length > bridge.Count) 
+                    answer++;
+
+
+
+
+
+
+
+
+
+
+                    /*次のトラックが橋に進入可能なら進入させる*/
+                    int inBridge = (qTruckList.TryPeek(out inBridge)) ? inBridge : 0;
+                    if (inBridge <= (weight - bridge.Sum()) && bridge_length > bridge.Count) 
                     {
-                        if(!truckPeek.Equals(0))
-                        {
-                            int tryDequeue = (qTruckList.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
-                            bridge.Enqueue(truckPeek); /*トラックが橋に進入*/
-
-                            answer++;
-                        }
+                        /*待機トラックキューから削除*/
+                        int tryDequeue = (qTruckList.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
+                        /*トラックが橋に進入*/
+                        bridge.Enqueue(inBridge); 
+                        answer++;
                     }
-                    else break;
+                    
+
+
+                    // /*トラックが橋から降りる*/
+                    // if(bridge.Count.Equals(2))
+                    // {
+                    //     int exitBridge = (bridge.TryDequeue(out exitBridge)) ? exitBridge : 0;
+                    //     bridge.Enqueue(exitBridge); 
+                    //     answer++;
+                    //     exitTruckList.Enqueue(exitBridge);
+                    // }
+
+
+
+                    Console.WriteLine("bridge >>>>>> : " + string.Join(",", bridge));
+
+
+
+                    
+                    /*トラックが進入できるかと橋に空きがあるかをチェック*/
+                    // if (truckPeek <= (weight - bridge.Sum()) && bridge_length > bridge.Count) 
+                    // {
+                    //     if(!truckPeek.Equals(0))
+                    //     {
+                    //         int tryDequeue = (qTruckList.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
+                    //         bridge.Enqueue(truckPeek); /*トラックが橋に進入*/
+
+                    //         answer++;
+                    //     }
+                    // }
+                    // else break;
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ///////////////////////////
-
                 
-                Console.WriteLine("bridge >>>>>> : " + string.Join(",", bridge));
 
                 /* 橋からトラックが出る */
                 // foreach(var item in bridge)
@@ -170,7 +179,7 @@ namespace CShapTest
 
                 // }
 
-                bridge.Clear();
+                //bridge.Clear();
                 //Console.WriteLine("exitTruckList : " + string.Join(",", exitTruckList));
             }
 
