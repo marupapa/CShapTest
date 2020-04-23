@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Concurrent;
 
 namespace CShapTest
 {
@@ -11,60 +10,9 @@ namespace CShapTest
         public ProgrammersTest()
         {
         }
-        static public int[] solution_stock(int[] prices)
-        {
-            int[] answer = new int[] { };
-            return answer;
-        }
-        /* 自分のプリントアウト順番を出力せよ
-        プリント優先順位の配列prioritiesと自分のプリント物の配列内の場所を示すlocationが引数としてあたえられたら、
-        自分のプリントは何番目に出力されるのかを求めよう。
-         */
-        public class StructPrinter
-        {
-            public int index { get; set; }
-            public int prioritie { get; set; }
-        }
-        static public int solution_printer(int[] priorities, int location) {
+
+        public int solution_printer(int[] priorities, int location) {
             int answer = 0;
-
-            ConcurrentQueue<StructPrinter> prior = new ConcurrentQueue<StructPrinter>();
-            for (int i = 0; i < priorities.Length; i++)
-            {
-                prior.Enqueue(new StructPrinter()
-                {
-                    index = i,
-                    prioritie = priorities[i]
-                });
-            }
-
-            while (!prior.IsEmpty)
-            {
-                StructPrinter peekResult = (prior.TryPeek(out peekResult)) ? peekResult : null;
-                StructPrinter dequeue = (prior.TryDequeue(out dequeue)) ? dequeue : null;
-
-                int max = 0;
-                foreach(var item in prior)
-                    if (max < item.prioritie) max = item.prioritie;
-
-                if (peekResult.prioritie < max)
-                {
-                    prior.Enqueue(dequeue);
-                }
-                else
-                {
-                    answer++;
-                    if (peekResult.index.Equals(location))
-                    {
-                        //Console.WriteLine("index, prioritie, answer : {0}, {1}, {2}", peekResult.index, peekResult.prioritie, answer);
-                        return answer;
-                    }
-                }
-                //Console.WriteLine("prior : " + string.Join(",", prior.ToList()));
-            }
-
-
-            Console.WriteLine("answer : {0}", answer);
             return answer;
         }
 
@@ -79,107 +27,91 @@ namespace CShapTest
         static public int solution_truck(int bridge_length, int weight, int[] truck_weights)
         {
             int answer = 0;
+
+            List<int> list = new List<int>();
             
-            /* 橋のキュー */
-            ConcurrentQueue<int> bridge = new ConcurrentQueue<int>();
-            /*橋を渡ろうとしているトラックのキュー*/
-            ConcurrentQueue<int> qTruckList = new ConcurrentQueue<int>();
-
-            for (int i = 0; i < truck_weights.Length; i++)
-                qTruckList.Enqueue(truck_weights[i]);
-
-            ConcurrentQueue<int> exitTruckList = new ConcurrentQueue<int>();
-
-            while(!qTruckList.IsEmpty)
+            for (int i=0; i<truck_weights.Length; i++)
             {
-                answer++;
-
-                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Console.WriteLine("qTruckList >>>>: {0}", string.Join(",", qTruckList));
-                Console.WriteLine("bridge.Sum >>>>:{0}", bridge.Sum());
-                /* 橋に進入するトラックの重さ */
-
-                int truckWeight = (qTruckList.TryDequeue(out truckWeight)) ? truckWeight : 0;
-
-                /* 橋にあるトラックの重さと進入トラックの重さ比較 */
-                if (truckWeight < (weight - bridge.Sum()) && bridge_length > bridge.Count) {
-                    bridge.Enqueue(truckWeight); /*トラックが橋に進入*/
-                    answer = answer + bridge_length;
-                }
-                /*トラックが橋に進入*/
-                bridge.Enqueue(truckWeight); 
-                //answer = answer + bridge_length;
-
-                while(!qTruckList.IsEmpty)
+                list.Add(truck_weights[i]);
+                if (i != (truck_weights.Length - 1))
                 {
-                    /*次のトラックが橋に進入可能なら進入させる*/
-                    int inBridge = (qTruckList.TryPeek(out inBridge)) ? inBridge : 0;
-                    if (inBridge <= (weight - bridge.Sum()) && bridge_length > bridge.Count) 
+                    if ((truck_weights[i] + truck_weights[i+1]) > weight) 
                     {
-                        /*待機トラックキューから削除*/
-                        int tryDequeue = (qTruckList.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
-                        /*トラックが橋に進入*/
-                        bridge.Enqueue(inBridge); 
-                        answer++;
+                        list.Add(0);
                     }
-
-                    // /*トラックが橋から降りる*/
-                    // if(bridge.Count.Equals(2))
-                    // {
-                    //     int exitBridge = (bridge.TryDequeue(out exitBridge)) ? exitBridge : 0;
-                    //     bridge.Enqueue(exitBridge); 
-                    //     answer++;
-                    //     exitTruckList.Enqueue(exitBridge);
-                    // }
-                    
-                    /*トラックが進入できるかと橋に空きがあるかをチェック*/
-                    // if (truckPeek <= (weight - bridge.Sum()) && bridge_length > bridge.Count) 
-                    // {
-                    //     if(!truckPeek.Equals(0))
-                    //     {
-                    //         int tryDequeue = (qTruckList.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
-                    //         bridge.Enqueue(truckPeek); /*トラックが橋に進入*/
-
-                    //         answer++;
-                    //     }
-                    // }
-                    // else break;
                 }
-                
 
-                /* 橋からトラックが出る */
-                // foreach(var item in bridge)
-                // {
-                //     int tryDequeue = (bridge.TryDequeue(out tryDequeue)) ? tryDequeue : 0;
-                //     //Console.WriteLine("橋から降りたトラック番号 >>>>:{0}", tryDequeue);
-                //     exitTruckList.Enqueue(tryDequeue);
-
-                // }
-
-                //bridge.Clear();
-                //Console.WriteLine("exitTruckList : " + string.Join(",", exitTruckList));
-                Console.WriteLine("bridge >>>>>> : " + string.Join(",", bridge));
             }
 
-        
-        
-            // List<int> list = new List<int>();
-            // for (int i = 0; i < truck_weights.Length; i++)
+            Console.WriteLine("list : " + string.Join(",", list));
+
+            answer = list.Count + bridge_length;
+
+            Console.WriteLine("answer : {0}" , answer);
+
+
+
+
+
+
+            /* 대기 트럭 리스트 */
+            // List<int> listTruck_weights = new List<int>();
+            // listTruck_weights = truck_weights.ToList();
+
+            // /* 건너는 중인 트럭 리스트 */
+            // List<int> listBridgeInTruc = new List<int>();
+            // /* 다리를 완전히 건ㄴ 트럭 리스트 */
+            // List<int> truck_complete = new List<int>();
+
+            // //int truckWeightsSum = 0;
+            // while(listTruck_weights.Any())
             // {
-            //     list.Add(truck_weights[i]);
-            //     if (i != (truck_weights.Length - 1)) /* 맨 마지막 트럭여부 체크 */
-            //     {
-            //         if ((truck_weights[i] + truck_weights[i + 1]) > weight)
-            //         {
-            //             for (int j = 1; j < bridge_length; j++) list.Add(0);
-            //         }
-            //     }
+            //     Console.WriteLine("listTruck_weights>:{0}", listTruck_weights[0]);
+
+
+
+
+
+            //     // truckWeightsSum = listBridgeInTruc.Sum();
+
+
+
+
+
+
+            //     // for(int i=0; i<bridge_length; i++)
+            //     // {
+            //     // Console.WriteLine("i >:{0}", i);
+
+            //     //     /* 트럭 진입 처리. */
+            //     //     // if((truckWeightsSum + listTruck_weights[0]) < weight)
+            //     //     // {
+            //     //     //     listBridgeInTruc.Add(listTruck_weights[0]);
+            //     //     //     listTruck_weights.Remove(listTruck_weights[0]);
+            //     //     //     answer++;
+                        
+
+
+            //     //     // }
+
+            //     // }
+
+
+
+            //     // listBridgeInTruc.Add(listTruck_weights[0]);
+            //     // listTruck_weights.Remove(listTruck_weights[0]);
+            //     // Console.WriteLine("listBridgeInTruc : " + string.Join(",", listBridgeInTruc));
+
+                
             // }
 
-            // answer = list.Count + bridge_length;
-        
 
-            Console.WriteLine("answer  >>>>:{0}", answer);
+            
+
+           // Console.WriteLine("answer >>>> :{0}", answer);
+
+
+
             return answer;
         }
         /*

@@ -15,7 +15,7 @@ namespace CShapTest
             //int answer = ProgrammersTest.solution1(5, new int[] { 2, 4 }, new int[] { 1, 3, 5 });
             //int answer = ProgrammersTest.solution1(8, new int[] { 2, 3 }, new int[] { 3, 4 });
 
-
+s
             /* solution 2 */
             //ProgrammersTest.solution2(new int[] { 1, 4, 3, 3, 4, 5, 6, 3, 2, 3, 3, 5 });
             //ProgrammersTest.solution2(new int[] { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 });
